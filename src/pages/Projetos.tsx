@@ -59,10 +59,10 @@ const statusLabels: Record<Status, string> = {
 };
 
 const statusColors: Record<Status, string> = {
-  planejamento: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-  andamento: "bg-orange-500/10 text-orange-500 border-orange-500/20",
-  concluido: "bg-green-500/10 text-green-500 border-green-500/20",
-  cancelado: "bg-red-500/10 text-red-500 border-red-500/20",
+  planejamento: "bg-muted text-foreground",
+  andamento: "bg-muted text-foreground",
+  concluido: "bg-muted text-foreground",
+  cancelado: "bg-muted text-foreground",
 };
 
 const statusIcons: Record<Status, any> = {
@@ -284,11 +284,11 @@ export default function Projetos() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-1">
-                <DollarSign className="w-3 h-3 text-green-500" />
+                <DollarSign className="w-3 h-3 text-muted-foreground" />
                 <span className="text-xs text-muted-foreground">Financeiro</span>
               </div>
               <div className="text-sm">
-                <div className="font-medium text-green-600">
+                <div className="font-medium text-foreground">
                   R$ {(projeto.valor_pago || 0).toLocaleString()}
                 </div>
                 <div className="text-xs text-muted-foreground">
@@ -299,7 +299,7 @@ export default function Projetos() {
             
             <div className="space-y-1">
               <div className="flex items-center gap-1">
-                <CalendarIcon className="w-3 h-3 text-blue-500" />
+                <CalendarIcon className="w-3 h-3 text-muted-foreground" />
                 <span className="text-xs text-muted-foreground">Sessões</span>
               </div>
               <div className="text-sm">
@@ -324,7 +324,7 @@ export default function Projetos() {
               </div>
             </div>
             {valorPendente > 0 && (
-              <div className="text-orange-600 font-medium">
+              <div className="text-foreground font-medium">
                 R$ {valorPendente.toLocaleString()} pendente
               </div>
             )}
@@ -591,7 +591,7 @@ export default function Projetos() {
                       </TableCell>
                       <TableCell>
                         <div className="text-sm">
-                          <div className="font-medium text-green-600">
+                          <div className="font-medium text-foreground">
                             R$ {(projeto.valor_pago || 0).toLocaleString()}
                           </div>
                           <div className="text-muted-foreground">
