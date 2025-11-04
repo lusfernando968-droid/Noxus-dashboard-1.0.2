@@ -1,2 +1,4 @@
 node_modules
 upload-staging/
+.vite/
+node_portable/
