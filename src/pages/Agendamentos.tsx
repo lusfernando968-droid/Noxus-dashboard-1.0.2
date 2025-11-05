@@ -109,12 +109,12 @@ export default function Agendamentos() {
   // Funções auxiliares
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'agendado': return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
-      case 'confirmado': return 'bg-green-500/10 text-green-500 border-green-500/20';
-      case 'em_andamento': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-      case 'concluido': return 'bg-purple-500/10 text-purple-500 border-purple-500/20';
-      case 'cancelado': return 'bg-red-500/10 text-red-500 border-red-500/20';
-      default: return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
+      case 'agendado': return 'bg-primary/10 text-primary border-primary/20';
+      case 'confirmado': return 'bg-primary/10 text-primary border-primary/20';
+      case 'em_andamento': return 'bg-primary/10 text-primary border-primary/20';
+      case 'concluido': return 'bg-success/10 text-success border-success/20';
+      case 'cancelado': return 'bg-destructive/10 text-destructive border-destructive/20';
+      default: return 'bg-primary/10 text-primary border-primary/20';
     }
   };
 
@@ -274,7 +274,7 @@ export default function Agendamentos() {
           <Card className="rounded-2xl">
             <CardContent className="p-6">
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-blue-500" />
+                <Calendar className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Total</p>
                   <p className="text-2xl font-bold">{totalAgendamentos}</p>
@@ -286,10 +286,10 @@ export default function Agendamentos() {
           <Card className="rounded-2xl">
             <CardContent className="p-6">
               <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5 text-orange-500" />
+                <Clock className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Hoje</p>
-                  <p className="text-2xl font-bold text-orange-500">{agendamentosHoje}</p>
+                  <p className="text-2xl font-bold text-primary">{agendamentosHoje}</p>
                 </div>
               </div>
             </CardContent>
@@ -298,10 +298,10 @@ export default function Agendamentos() {
           <Card className="rounded-2xl">
             <CardContent className="p-6">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-green-500" />
+                <CheckCircle className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Confirmados</p>
-                  <p className="text-2xl font-bold text-green-500">{agendamentosConfirmados}</p>
+                  <p className="text-2xl font-bold text-primary">{agendamentosConfirmados}</p>
                 </div>
               </div>
             </CardContent>
@@ -310,10 +310,10 @@ export default function Agendamentos() {
           <Card className="rounded-2xl">
             <CardContent className="p-6">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-purple-500" />
+                <CheckCircle className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Concluídos</p>
-                  <p className="text-2xl font-bold text-purple-500">{agendamentosConcluidos}</p>
+                  <p className="text-2xl font-bold text-primary">{agendamentosConcluidos}</p>
                 </div>
               </div>
             </CardContent>
