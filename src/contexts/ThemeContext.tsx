@@ -1,7 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useSoundEffects } from "@/hooks/useSoundEffects";
 
-type Theme = "light" | "dark";
+type Theme = "light" | "dark" | "system";
 type ColorTheme = "default" | "ocean" | "sunset" | "forest" | "purple" | "rose" | "black" | "custom";
 
 type ThemeContextType = {
@@ -9,6 +9,7 @@ type ThemeContextType = {
   colorTheme: ColorTheme;
   customColor: string;
   toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
   setColorTheme: (colorTheme: ColorTheme) => void;
   setCustomColor: (color: string) => void;
 };
@@ -18,10 +19,15 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { playSound } = useSoundEffects();
   
-  const [theme, setTheme] = useState<Theme>(() => {
-    const savedTheme = localStorage.getItem("theme") as Theme;
-    return savedTheme || "light";
+  const [theme, setThemeState] = useState<Theme>(() => {
+    const savedTheme = localStorage.getItem("theme") as Theme | null;
+    return savedTheme ?? "system";
   });
+
+  // Armazena o tema atual do sistema (claro/escuro)
+  const [systemTheme, setSystemTheme] = useState<Exclude<Theme, "system">>(() =>
+    window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  );
 
   const [colorTheme, setColorThemeState] = useState<ColorTheme>(() => {
     const savedColorTheme = localStorage.getItem("colorTheme") as ColorTheme;
@@ -33,6 +39,25 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return savedCustomColor || "#3b82f6";
   });
 
+  // Computa o tema efetivo que será aplicado à UI
+  const effectiveTheme = useMemo<Exclude<Theme, "system">>(() => (theme === "system" ? systemTheme : theme), [theme, systemTheme]);
+
+  // Observa alterações do tema do SO quando em modo 'system'
+  useEffect(() => {
+    const mq = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+    if (!mq) return;
+
+    const handler = (e: MediaQueryListEvent) => setSystemTheme(e.matches ? "dark" : "light");
+    // Atualiza imediatamente para garantir consistência
+    setSystemTheme(mq.matches ? "dark" : "light");
+
+    if (theme === "system") {
+      mq.addEventListener?.("change", handler);
+    }
+
+    return () => mq.removeEventListener?.("change", handler);
+  }, [theme]);
+
   useEffect(() => {
     const root = window.document.documentElement;
     
@@ -40,8 +65,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.classList.remove("light", "dark");
     root.classList.remove("theme-ocean", "theme-sunset", "theme-forest", "theme-purple", "theme-rose", "theme-black", "theme-custom");
     
-    // Adiciona o tema de luz/escuridão
-    root.classList.add(theme);
+    // Adiciona o tema de luz/escuridão efetivo
+    root.classList.add(effectiveTheme);
+
+    // Comunica ao navegador os esquemas de cor suportados e o esquema atual
+    // Isso melhora controles nativos (inputs, scrollbar, etc.)
+    root.style.setProperty("color-scheme", effectiveTheme);
     
     // Adiciona o tema de cor se não for default
     if (colorTheme !== "default") {
@@ -62,14 +91,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem("theme", theme);
     localStorage.setItem("colorTheme", colorTheme);
     localStorage.setItem("customColor", customColor);
-  }, [theme, colorTheme, customColor]);
+  }, [effectiveTheme, theme, colorTheme, customColor]);
 
   const toggleTheme = () => {
-    setTheme((prev) => {
+    setThemeState((prev) => {
       const newTheme = prev === "light" ? "dark" : "light";
       playSound(newTheme === "dark" ? "darkMode" : "toggle");
       return newTheme;
     });
+  };
+
+  const setTheme = (newTheme: Theme) => {
+    setThemeState(newTheme);
+    playSound(newTheme === "dark" ? "darkMode" : "toggle");
   };
 
   const setColorTheme = (newColorTheme: ColorTheme) => {
@@ -83,7 +117,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, colorTheme, customColor, toggleTheme, setColorTheme, setCustomColor }}>
+    <ThemeContext.Provider value={{ theme, colorTheme, customColor, toggleTheme, setTheme, setColorTheme, setCustomColor }}>
       {children}
     </ThemeContext.Provider>
   );

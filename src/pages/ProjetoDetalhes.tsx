@@ -166,12 +166,12 @@ export default function ProjetoDetalhes() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'planejamento': return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
-      case 'em_andamento': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-      case 'pausado': return 'bg-orange-500/10 text-orange-500 border-orange-500/20';
-      case 'concluido': return 'bg-green-500/10 text-green-500 border-green-500/20';
-      case 'cancelado': return 'bg-red-500/10 text-red-500 border-red-500/20';
-      default: return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
+      case 'planejamento': return 'bg-primary/10 text-primary border-primary/20';
+      case 'em_andamento': return 'bg-primary/10 text-primary border-primary/20';
+      case 'pausado': return 'bg-muted/10 text-muted-foreground border-muted/20';
+      case 'concluido': return 'bg-success/10 text-success border-success/20';
+      case 'cancelado': return 'bg-destructive/10 text-destructive border-destructive/20';
+      default: return 'bg-primary/10 text-primary border-primary/20';
     }
   };
 
@@ -188,19 +188,19 @@ export default function ProjetoDetalhes() {
 
   const getPrioridadeColor = (prioridade: string) => {
     switch (prioridade) {
-      case 'baixa': return 'bg-green-500/10 text-green-500 border-green-500/20';
-      case 'media': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-      case 'alta': return 'bg-red-500/10 text-red-500 border-red-500/20';
-      default: return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
+      case 'baixa': return 'bg-muted/10 text-muted-foreground border-muted/20';
+      case 'media': return 'bg-info/10 text-info border-info/20';
+      case 'alta': return 'bg-warning/10 text-warning border-warning/20';
+      default: return 'bg-primary/10 text-primary border-primary/20';
     }
   };
 
   const getSessaoStatusColor = (status: string) => {
     switch (status) {
-      case 'agendada': return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
-      case 'concluida': return 'bg-green-500/10 text-green-500 border-green-500/20';
-      case 'cancelada': return 'bg-red-500/10 text-red-500 border-red-500/20';
-      default: return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
+      case 'agendada': return 'bg-primary/10 text-primary border-primary/20';
+      case 'concluida': return 'bg-success/10 text-success border-success/20';
+      case 'cancelada': return 'bg-destructive/10 text-destructive border-destructive/20';
+      default: return 'bg-primary/10 text-primary border-primary/20';
     }
   };
 
@@ -268,10 +268,10 @@ export default function ProjetoDetalhes() {
           <Card className="rounded-2xl">
             <CardContent className="p-6">
               <div className="flex items-center gap-2">
-                <DollarSign className="w-5 h-5 text-green-500" />
+                <DollarSign className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Valor Total</p>
-                  <p className="text-2xl font-bold">R$ {projeto.valor_total.toFixed(2)}</p>
+                  <p className="text-2xl font-bold text-primary">R$ {projeto.valor_total.toFixed(2)}</p>
                 </div>
               </div>
             </CardContent>
@@ -280,10 +280,10 @@ export default function ProjetoDetalhes() {
           <Card className="rounded-2xl">
             <CardContent className="p-6">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-blue-500" />
+                <CheckCircle className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Valor Pago</p>
-                  <p className="text-2xl font-bold text-blue-500">R$ {projeto.valor_pago.toFixed(2)}</p>
+                  <p className="text-2xl font-bold text-primary">R$ {projeto.valor_pago.toFixed(2)}</p>
                 </div>
               </div>
             </CardContent>
@@ -292,10 +292,10 @@ export default function ProjetoDetalhes() {
           <Card className="rounded-2xl">
             <CardContent className="p-6">
               <div className="flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-purple-500" />
+                <Calendar className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Sessões</p>
-                  <p className="text-2xl font-bold text-purple-500">{sessoesCompletas}/{totalSessoes}</p>
+                  <p className="text-2xl font-bold text-primary">{sessoesCompletas}/{totalSessoes}</p>
                 </div>
               </div>
             </CardContent>
@@ -304,10 +304,10 @@ export default function ProjetoDetalhes() {
           <Card className="rounded-2xl">
             <CardContent className="p-6">
               <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5 text-orange-500" />
+                <Clock className="w-5 h-5 text-primary" />
                 <div>
                   <p className="text-sm text-muted-foreground">Progresso</p>
-                  <p className="text-2xl font-bold text-orange-500">{Math.round(progressoSessoes)}%</p>
+                  <p className="text-2xl font-bold text-primary">{Math.round(progressoSessoes)}%</p>
                 </div>
               </div>
             </CardContent>
@@ -444,15 +444,15 @@ export default function ProjetoDetalhes() {
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="text-center p-4 border rounded-xl">
-                    <p className="text-2xl font-bold text-green-500">R$ {projeto.valor_total.toFixed(2)}</p>
+                    <p className="text-2xl font-bold text-primary">R$ {projeto.valor_total.toFixed(2)}</p>
                     <p className="text-sm text-muted-foreground">Valor Total</p>
                   </div>
                   <div className="text-center p-4 border rounded-xl">
-                    <p className="text-2xl font-bold text-blue-500">R$ {projeto.valor_pago.toFixed(2)}</p>
+                    <p className="text-2xl font-bold text-primary">R$ {projeto.valor_pago.toFixed(2)}</p>
                     <p className="text-sm text-muted-foreground">Valor Pago</p>
                   </div>
                   <div className="text-center p-4 border rounded-xl">
-                    <p className="text-2xl font-bold text-orange-500">R$ {(projeto.valor_total - projeto.valor_pago).toFixed(2)}</p>
+                    <p className="text-2xl font-bold text-primary">R$ {(projeto.valor_total - projeto.valor_pago).toFixed(2)}</p>
                     <p className="text-sm text-muted-foreground">Saldo Restante</p>
                   </div>
                 </div>
@@ -462,9 +462,9 @@ export default function ProjetoDetalhes() {
                     <span>Progresso do Pagamento</span>
                     <span>{Math.round(progressoPagamento)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-muted rounded-full h-2">
                     <div 
-                      className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                      className="bg-primary h-2 rounded-full transition-all duration-300"
                       style={{ width: `${progressoPagamento}%` }}
                     ></div>
                   </div>

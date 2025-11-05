@@ -2,6 +2,19 @@
 
 Um sistema de CRM moderno e intuitivo com visualização avançada de rede de indicações, desenvolvido com React, TypeScript e Supabase.
 
+## 📝 Changelog: Página de Clientes
+
+Data: Atual
+
+- fix(clientes): restaurar ícones de setas laterais, exibindo-os apenas quando o `Card` da tabela está ≥50% visível na viewport e existe overflow horizontal, usando `IntersectionObserver` no container do card.
+- fix(global): remover barra horizontal adicional global adicionando `overflow-x-hidden` ao `body`, mantendo o scroll horizontal somente no container da tabela (`overflow-x-auto`).
+- ux: manter coluna "Ações" com `sticky right-0` e `z-index` apropriado para visibilidade durante a rolagem horizontal.
+- docs: registrar causa provável (conteúdo largo + coluna sticky gerando overflow global; detecção de visibilidade baseada no container errado escondendo as setas) e a solução aplicada.
+
+Validação
+- Testado em resoluções mobile, tablet e desktop via servidor de desenvolvimento (Vite).
+- Setas reaparecem quando cabíveis e somem fora de contexto, sem barras extras globais.
+
 ## ✨ Funcionalidades Principais
 
 ### 📊 Dashboard Inteligente

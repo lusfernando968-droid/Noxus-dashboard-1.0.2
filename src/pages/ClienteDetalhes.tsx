@@ -144,15 +144,15 @@ export default function ClienteDetalhes() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'planejamento':
-        return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+        return 'bg-primary/10 text-primary border-primary/20';
       case 'andamento':
-        return 'bg-orange-500/10 text-orange-500 border-orange-500/20';
+        return 'bg-primary/10 text-primary border-primary/20';
       case 'concluido':
-        return 'bg-green-500/10 text-green-500 border-green-500/20';
+        return 'bg-success/10 text-success border-success/20';
       case 'cancelado':
-        return 'bg-red-500/10 text-red-500 border-red-500/20';
+        return 'bg-destructive/10 text-destructive border-destructive/20';
       default:
-        return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
+        return 'bg-primary/10 text-primary border-primary/20';
     }
   };
 
@@ -209,8 +209,8 @@ export default function ClienteDetalhes() {
         <Card className="rounded-2xl">
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-500/10 rounded-lg">
-                <FolderOpen className="h-5 w-5 text-blue-500" />
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <FolderOpen className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Total de Projetos</p>
@@ -223,8 +223,8 @@ export default function ClienteDetalhes() {
         <Card className="rounded-2xl">
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-green-500/10 rounded-lg">
-                <DollarSign className="h-5 w-5 text-green-500" />
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <DollarSign className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Valor Total</p>
@@ -237,8 +237,8 @@ export default function ClienteDetalhes() {
         <Card className="rounded-2xl">
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-500/10 rounded-lg">
-                <DollarSign className="h-5 w-5 text-emerald-500" />
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <DollarSign className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Valor Pago</p>
@@ -251,8 +251,8 @@ export default function ClienteDetalhes() {
         <Card className="rounded-2xl">
           <CardContent className="p-6">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-orange-500/10 rounded-lg">
-                <FolderOpen className="h-5 w-5 text-orange-500" />
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <FolderOpen className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Projetos Ativos</p>
